@@ -1,0 +1,22 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "description": "A dashboard with canvas using a API public",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node ./Back-End/app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Equipo01-UCamp/dashboard.git"
+  },
+  "author": "Equipo 01",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Equipo01-UCamp/dashboard/issues"
+  },
+  "homepage": "https://github.com/Equipo01-UCamp/dashboard#readme",
+  "dependencies": {
+  }
+}
