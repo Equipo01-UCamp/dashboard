@@ -1,5 +1,6 @@
 limiteFecha();
 llenarPais();
+fechaFin.addEventListener ('change', validaFechaInicio);
 function limiteFecha () {
   let today = new Date ();
   let dd = today.getDate () - 1; //restamos un día 
@@ -18,8 +19,20 @@ function limiteFecha () {
   document.getElementById ('fechaInicio').setAttribute ('max', today);
 }
 
+function validaFechaInicio() {
+  fechaInicio = document.getElementById('fechaInicio').value;
+  fechaFin = document.getElementById('fechaFin').value;
+  if (fechaInicio > fechaFin) {
+    alert('Fecha Inicio no puede ser mayor a Fecha Fin');
+    var inputInicio = document.getElementById('fechaInicio');
+    var inputFin = document.getElementById('fechaFin');
+    inputInicio.value = '';
+    inputFin.value = '';
+  }
+}
+
 function llenarPais(){
-    let paises=[{"valor":"US","texto":"Estados Unidos de América"}, 
+    const paises=[{"valor":"US","texto":"Estados Unidos de América"}, 
 	{"valor":"India","texto":"India"},
 	{"valor":"Brazil","texto":"Brasil"},
 	{"valor":"Russia", "texto":"Rusia"}, 
@@ -38,4 +51,6 @@ function llenarPais(){
         select.appendChild(opt);
     }
 }
+
+
 
