@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node ./Back-End/getData"
+    "server": "node ./Back-End/app"
   },
   "repository": {
     "type": "git",

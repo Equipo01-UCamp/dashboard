@@ -5,22 +5,13 @@ const express = require('express');
 const app = express();
 
 //Definir Variables
-// const status = 'confirmed';
-//     // status posibles (solo usar para pruebas, este parámetro lo ingresará el equipo de Front-End)
-//     // confirmed
-//     // deaths
-//     // recovery
-// const country = 'Colombia';
+    // status posibles (solo usar para pruebas, este parámetro lo ingresará el equipo de Front-End)
+    // confirmed
+    // deaths
+    // recovery
+
 const port = 3030;
-
 app.use(cors());
-
-  // async function  Consultar() {
-  //     const data = await getDataCovid(country, status);
-  //     console.log(data);
-  // }
-
-  // Consultar();
 
 //Definir consulta "express"
 
