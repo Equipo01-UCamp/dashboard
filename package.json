@@ -1,7 +1,7 @@
 {
   "name": "dashboard",
   "version": "1.0.0",
-  "description": "A dashboard with canvas using a API public",
+  "description": "A dashboard with canvas using a public API ",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
