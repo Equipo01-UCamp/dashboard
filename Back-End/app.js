@@ -1,30 +1,36 @@
-const fetch = require("../node_modules/node-fetch");
+//Importar librerias
+const cors = require('cors');
+const getDataCovid = require("./getData");
+const express = require('express');
+const app = express();
 
-const status = 'confirmed';
+//Definir Variables
+    // status posibles (solo usar para pruebas, este parámetro lo ingresará el equipo de Front-End)
+    // confirmed
+    // deaths
+    // recovery
 
-// status posibles (solo usar para pruebas, este parámetro lo ingresará el equipo de Front-End)
-// confirmed
-// deaths
-// recovery
+const port = 3030;
+app.use(cors());
 
-const country = 'Mexico';
+//Definir consulta "express"
 
-// consulta a histórico
-const getApiCovid_history = (country, status) => {
-    fetch(`https://covid-api.mmediagroup.fr/v1/history?country=${country}&status=${status}`)
-        .then(promiseFetch => promiseFetch.json())
-        .then(content_hist => console.log(content_hist));
-};
-
-// consulta a acumulado (corte al día anterior)
-const getApiCovid_acumulate = country => {
-    fetch(`https://covid-api.mmediagroup.fr/v1/cases?country=${country}`)
-        .then(promiseFetch => promiseFetch.json())
-        .then(content_acum => console.log(content_acum));
-};
-
-setTimeout(() => console.log('------HISTÓRICO-----\n'),0000);
-console.log(getApiCovid_history(country, status));
-setTimeout(() => console.log('\n------ACUMULADO-----\n'), 1000);
-console.log(getApiCovid_acumulate(country));
-
+app.get('/api/covid', async function (req, res) {
+    try {
+      let country = req.query.country;
+      let status = req.query.status;
+      const data = await getDataCovid(country, status)
+      res.send(data)
+    } catch (error) {
+      res.status = 500
+      res.send({
+        message: 'No se pueden obtener Datos sin los parametros de "status" y "country"'
+      })
+      console.error(error)
+    }
+  })
+  
+  app.listen(port, function () {
+    console.log(`Server corriendo en el puerto: ${port}`)
+  })
+  
