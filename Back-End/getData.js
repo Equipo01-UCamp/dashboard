@@ -1,5 +1,3 @@
-//SE DEFINE FUNCION PARA OBTENER DATOS COVID DEL API
-
 // importar librerias
 const axios = require('axios');
 
