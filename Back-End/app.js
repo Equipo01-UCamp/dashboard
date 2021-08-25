@@ -4,8 +4,7 @@ const getDataCovid = require("./getData");
 const express = require('express');
 const app = express();
 
-//Definir Variables
-    // status posibles (solo usar para pruebas, este parámetro lo ingresará el equipo de Front-End)
+//Param Status
     // confirmed
     // deaths
     // recovery
@@ -13,14 +12,28 @@ const app = express();
 const port = 3030;
 app.use(cors());
 
-//Definir consulta "express"
+//Definir funcion para fechas
+const databydates = (data, init, end) => {
+  const { dates } = data.All;
+  const dataFiltered = {};
+  for (const date in dates) {
+    if (date >= init && date <= end) {
+      dataFiltered[date] = dates[date];
+    }
+  }
+  return dataFiltered
+};
 
+//Definir consulta "express"
 app.get('/api/covid', async function (req, res) {
     try {
-      let country = req.query.country;
-      let status = req.query.status;
-      const data = await getDataCovid(country, status)
-      res.send(data)
+      const { country } = req.query;
+      const { status } = req.query;
+      const { initDate } = req.query;
+      const { endDate } = req.query;
+      const data = await getDataCovid(country, status);
+      const dataFiltered = databydates(data, initDate, endDate);
+      res.send(dataFiltered)
     } catch (error) {
       res.status = 500
       res.send({
@@ -28,9 +41,8 @@ app.get('/api/covid', async function (req, res) {
       })
       console.error(error)
     }
-  })
-  
+  });
+
   app.listen(port, function () {
     console.log(`Server corriendo en el puerto: ${port}`)
-  })
-  
+  });
