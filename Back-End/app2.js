@@ -26,11 +26,25 @@ function doCharts() {
                 .then(content_hist => {
                     dMuertos = content_hist.All.dates[fechaEnd] - content_hist.All.dates[fechaStart];
                     console.log('Muertos : ' + dMuertos);
-                   
+                    buscarRecuperados();
                 });
     }
     
-    
+    function buscarRecuperados(){
+        let url = 'https://covid-api.mmediagroup.fr/v1/history?country=' + country + '&status=recovery'
+            fetch(url)
+                .then(promiseFetch => promiseFetch.json())
+                .then(content_hist => {
+                    dRecuperados = content_hist.All.dates[fechaEnd] - content_hist.All.dates[fechaStart];
+                    console.log('Recuperados : ' + dRecuperados);
+                    cargarDatos();
+                })
+                .catch(error => {
+                    dRecuperados = 0;
+                    console.log('Recuperados* : ' + dRecuperados);
+                    cargarDatos();}
+                    );
+    }
     
     
     function cargarDatos(){
@@ -43,7 +57,7 @@ function doCharts() {
             const acumulado = new Chart(acu, {
                 type: 'bar',
                 data: {
-                    labels: ['Contagiados', 23456, 'Muertos'],
+                    labels: ['Contagiados', 'Recuperados', 'Muertos'],
                     datasets: [{
                         label: 'No.Personas',
                         data: [dContagiados, dRecuperados, dMuertos],
