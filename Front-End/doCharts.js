@@ -1,5 +1,13 @@
    function doCharts() {
 
+    /*
+    Realizado por:
+    Stephanie Cortes
+    Hector Javier
+    Mayra Elizabeth
+    Jorge Lizarraga
+    */
+
     let fechaStart = document.getElementById('fechaInicio').value;
     let fechaEnd = document.getElementById('fechaFin').value;
     let country = document.getElementById('pais').value;
