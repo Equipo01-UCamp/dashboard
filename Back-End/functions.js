@@ -2,12 +2,16 @@
 const filterbyTotal = (objC, objD, objR, init, end) => {
     const { dates: datesC } = objC.All;
     const { dates: datesD } = objD.All;
-    const { dates: datesR } = objR.Global.All;
+    const { dates: datesR } = objR.All;
     const containerTotal = {};
 
     containerTotal["confirmed"] = datesC[end] - datesC[init];
     containerTotal["deaths"] = datesD[end] - datesD[init];
-    containerTotal["recovery"] = datesR[end] - datesR[init];
+    if (datesR[init] !== 0 && datesR[end] !== 0) {
+        containerTotal["recovery"] = datesR[end] - datesR[init];
+    } else {
+        containerTotal["recovery"] = 0;
+    }
     return containerTotal;
 };
 
@@ -30,6 +34,7 @@ const sortObjectByDates = (obj) => Object.keys(obj).sort().reduce((r, key) => (r
 const transformData = (data, init, end) => {
     const dataFiltered = databydates(data, init, end);
     Object.keys(dataFiltered).map((key, index, element) => dataFiltered[key] -= dataFiltered[element[index+1]]);
+    Object.keys(dataFiltered).forEach(key => {if (dataFiltered[key] < 0) {dataFiltered[key] = 0}})
     delete dataFiltered[init];
     return sortObjectByDates(dataFiltered);
 };

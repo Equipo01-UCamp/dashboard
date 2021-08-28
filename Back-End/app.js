@@ -16,7 +16,7 @@ app.get('/covid/result', async function (req, res) {
       const { endDate } = req.query;
       const dConfirmed = await getDataCovid(country, "confirmed");
       const dDeaths = await getDataCovid(country, "deaths");
-      const dRecovery = await getDataCovid(country, "recovery");
+      const dRecovery = await getDataCovid(country, "recovered");
       const objectTotal = funs.filterbyTotal(dConfirmed, dDeaths, dRecovery, initDate, endDate);
       res.send(objectTotal)
     } catch (error) {
