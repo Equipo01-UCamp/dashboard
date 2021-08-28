@@ -1,4 +1,4 @@
-function doCharts() {
+   function doCharts() {
 
     let fechaStart = document.getElementById('fechaInicio').value;
     let fechaEnd = document.getElementById('fechaFin').value;
@@ -6,6 +6,15 @@ function doCharts() {
     let tContagiados=null;
     let tRecuperados= null;
     let tMuertos= null
+
+    let key_confirmados = [];
+    let value_confirmados=[];
+
+    let key_muertos = [];
+    let value_muertos=[];
+
+    let key_recuperados = [];
+    let value_recuperados=[];
     
     
     let url = 'http://localhost:3030/covid/result?country=' + country + '&initDate=' +fechaStart+ '&endDate=' +fechaEnd
@@ -19,7 +28,41 @@ function doCharts() {
                     
                     console.log(content_hist);
                     cargarDatos();
-                });        
+                });
+
+
+    let url1 = 'http://localhost:3030/covid/history?country=' + country + '&status=confirmed&initDate=' +fechaStart+ '&endDate=' +fechaEnd
+            fetch(url1)
+                    .then(promiseFetch => promiseFetch.json())
+                    .then(content_hist => { 
+                        key_confirmados = Object.keys(content_hist);
+                        value_confirmados = Object.values(content_hist);
+                        console.log(content_hist);
+                        cargarDatos();
+                    });    
+
+     let url2 = 'http://localhost:3030/covid/history?country=' + country + '&status=deaths&initDate=' +fechaStart+ '&endDate=' +fechaEnd
+             fetch(url2)
+                       .then(promiseFetch => promiseFetch.json())
+                        .then(content_hist => { 
+                                key_muertos = Object.keys(content_hist);
+                                value_muertos = Object.values(content_hist);
+                                console.log(content_hist);
+                                cargarDatos();
+                       });                   
+     let url3 = 'http://localhost:3030/covid/history?country=' + country + '&status=recovered&initDate=' +fechaStart+ '&endDate=' +fechaEnd
+            fetch(url3)
+                    .then(promiseFetch => promiseFetch.json())
+                    .then(content_hist => { 
+                        key_recuperados = Object.keys(content_hist);
+                        value_recuperados = Object.values(content_hist);
+                        console.log(content_hist);
+                        cargarDatos();
+                    });    
+    
+
+
+        
     
     function cargarDatos(){
     
@@ -69,10 +112,10 @@ function doCharts() {
             const distribucion = new Chart(distCasos, {
                 type: 'line',
                 data: {
-                    labels: 456,
+                    labels: key_confirmados,
                     datasets: [{
                         label: 'No.Personas',
-                        data: 234,
+                        data: value_confirmados,
                         fill: false,
                         backgroundColor: ['rgba(52, 99, 247, 1)'],
                         borderColor: ['rgba(52, 99, 247, 1)'],
@@ -97,10 +140,10 @@ function doCharts() {
             const muertes = new Chart(distMuertes, {
                 type: 'line',
                 data: {
-                    labels: 34567,
+                    labels: key_muertos,
                     datasets: [{
                         label: 'No.Personas',
-                        data: 32456,
+                        data: value_muertos,
                         fill: false,
                         backgroundColor: ['rgba(217, 60, 35, 1)'],
                         borderColor: ['rgba(217, 60, 35, 1)'],
@@ -125,10 +168,10 @@ function doCharts() {
             const recus = new Chart(recuperados, {
                 type: 'line',
                 data: {
-                    labels: 23456,
+                    labels: key_recuperados,
                     datasets: [{
                         label: 'No.Personas',
-                        data: 3456,
+                        data: value_recuperados,
                         fill: false,
                         backgroundColor: ['rgba(0, 210, 50, 1)'],
                         borderColor: ['rgba(0, 210, 50, 1)'],
