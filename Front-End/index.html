@@ -7,12 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@latest/dist/Chart.min.js"></script>
     <title>Proyecto 3</title>
 </head>
 
-<body>
+<body onload="onLoadParams()">
     <!--Header-->
     <nav class="navbar navbar-dark bg-dark text-dark">
         <a href="#"><img class="h-8 w-auto sm:h-10" src="./images/iconocovid.jpg" alt="" width="50" height="50"></a>
@@ -40,7 +38,7 @@
             <label class="input-group-text" for="pais">Pais:</label>
         </div>
         <select class="custom-select" id="pais">
-            
+
         </select>
     </div>
 
@@ -52,21 +50,19 @@
 
     <div class="container">
         <div class="row my-3">
-            <div class="col">
-                
-            </div>
+            <div class="col"></div>
         </div>
         <div class="row my-2">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" id="c1">
                         <canvas id="acumulado" height="200"></canvas>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" id="c2">
                         <canvas id="distCasos" height="200"></canvas>
                     </div>
                 </div>
@@ -75,23 +71,25 @@
         <div class="row my-3">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" id="c3">
                         <canvas id="distMuertes" height="200"></canvas>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" id="c4">
                         <canvas id="recuperados" height="200"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@latest/dist/Chart.min.js"></script>
+    <script src="front.js"></script>
+    <script src="doCharts.js"></script>
 </body>
-<script src="front.js"></script>
-<script src="doCharts.js"></script>
 
 </html>
 
